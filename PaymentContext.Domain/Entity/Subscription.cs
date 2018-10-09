@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Flunt.Validations;
+using PaymentContext.Shared.Entities;
 
 namespace PaymentContext.Domain.Entity
 {
-    public class Subscription
+    public class Subscription : Entities
     {
         public Subscription(DateTime? expireDate)
         {
@@ -18,6 +20,7 @@ namespace PaymentContext.Domain.Entity
         public DateTime CreateDate { get; private set; }
         public DateTime LastUpdateDate { get; private set; }
         public DateTime? ExpireDate { get; private set; }
+        public DateTime? PaidDate { get; private set; }
         public bool Active { get; private set; }
         public IReadOnlyCollection<PaymentMethod> PaymentMethods { get { return _PaymentMethods.ToArray(); } }
         private IList<PaymentMethod> _PaymentMethods;
@@ -28,6 +31,14 @@ namespace PaymentContext.Domain.Entity
             Active = status;
             LastUpdateDate = DateTime.Now;
         }
-        public void AddPaymentMethod(PaymentMethod paymentMethod) => _PaymentMethods.Add(paymentMethod);
+        public void AddPaymentMethod(PaymentMethod paymentMethod)
+        {
+            AddNotifications(new Contract().Requires().IsGreaterThan(
+                DateTime.Now, paymentMethod.PaidDate,
+                "Subscription.PaidDate",
+                "Payment date is older than current Date.")
+            );
+            _PaymentMethods.Add(paymentMethod);
+        }
     }
 }
