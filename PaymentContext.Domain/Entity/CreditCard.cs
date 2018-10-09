@@ -1,4 +1,5 @@
 using System;
+using PaymentContext.Domain.ValueObjects;
 
 namespace PaymentContext.Domain.Entity
 {
@@ -7,6 +8,7 @@ namespace PaymentContext.Domain.Entity
         protected CreditCard(
             DateTime paidDate,
             DateTime expireDate,
+            Document document,
             double total,
             double totalPaid,
             string cardNumber,
@@ -19,6 +21,7 @@ namespace PaymentContext.Domain.Entity
         ) : base(
             paidDate,
             expireDate,
+            document,
             total,
             totalPaid,
             cardNumber,

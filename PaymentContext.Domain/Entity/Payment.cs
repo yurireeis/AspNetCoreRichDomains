@@ -1,12 +1,20 @@
 using System;
+using PaymentContext.Domain.ValueObjects;
 
 namespace PaymentContext.Domain.Entity
 {
     public abstract class PaymentMethod
     {
+        public string Number { get; private set; }
+        public DateTime PaidDate { get; private set; }
+        public DateTime ExpireDate { get; private set; }
+        public Document Document { get; private set; }
+        public double Total { get; private set; }
+        public double TotalPaid { get; private set; }
         public PaymentMethod(
             DateTime paidDate, 
-            DateTime expireDate, 
+            DateTime expireDate,
+            Document document,
             double total, 
             double totalPaid
         ) {
@@ -14,15 +22,8 @@ namespace PaymentContext.Domain.Entity
             PaidDate = paidDate;
             ExpireDate = expireDate;
             Total = total;
-            TotalPaid = totalPaid;
+            TotalPaid = totalPaid;            
         }
-
-        // payment must be boleto, Card (Credit or Debit) or PayPal
-        public string Number { get; private set; }
-        public DateTime PaidDate { get; private set; }
-        public DateTime ExpireDate { get; private set; }
-        public double Total { get; private set; }
-        public double TotalPaid { get; private set; }
 
         private void SetGuid()
         {

@@ -1,43 +1,37 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using PaymentContext.Domain.ValueObjects;
+using PaymentContext.Shared.Entities;
 
 namespace PaymentContext.Domain.Entity
 {
-    public class Student
+    public class Student : Entities
     {
-        public Student(string firstName, string lastName, string email)
-        {
-          SetFirstName(firstName);
-          SetLastName(lastName);
-          SetEmail(email);
-          _Subscriptions = new List<Subscription>();
+        public Student(
+            Name name,
+            Email email,
+            Address address,
+            Document document
+        ) : base() {
+            this.Name = name;
+            this.Email = email;
+            this.Address = address;
+            this.Document = document;
+            _Subscriptions = new List<Subscription>();
         }
-
-        public string FirstName { get; private set; }
-        public string LastName { get; private set; }
-        public string Email { get; private set; }
-        public string Address { get; private set; }
+        public Name Name { get; private set; }
+        public Email Email { get; private set; }
+        public Address Address { get; private set; }
+        public Document Document { get; private set; }
         public IReadOnlyCollection<Subscription> Subscriptions { get { return _Subscriptions.ToArray(); } }
         private IList<Subscription> _Subscriptions;
-        public void SetFirstName(string firstName)
-        {
-            if (firstName.Length >= 3) { throw new Exception("Name must have at least 3 characters"); }
-            FirstName = firstName;
-        }
-
-        // set regex for email validation here
-        public void SetEmail(string email) => Email = email;
-
-        public void SetLastName(string lastName)
-        {
-            if (lastName.Length >= 3) { throw new Exception("Name must have at least 3 characters"); }
-            LastName = lastName;
-        }
 
         public void AddSubscription(Subscription subscription)
         {
             // if has already an active subscriptions, abort
+            if(true) { throw new Exception(); }
+
             // abort all another subscriptions and set new as default
             foreach (var sub in Subscriptions) { sub.Activate(false); }
 

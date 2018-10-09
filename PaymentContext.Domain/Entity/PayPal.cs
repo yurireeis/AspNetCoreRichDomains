@@ -1,4 +1,5 @@
 using System;
+using PaymentContext.Domain.ValueObjects;
 
 namespace PaymentContext.Domain.Entity
 {
@@ -7,12 +8,14 @@ namespace PaymentContext.Domain.Entity
         public PayPal(
             DateTime paidDate,
             DateTime expireDate,
+            Document document,
             double total,
             double totalPaid,
             string transationCode
         ) : base(
             paidDate,
             expireDate,
+            document,
             total,
             totalPaid
         ){
