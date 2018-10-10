@@ -7,7 +7,7 @@ namespace PaymentContext.Domain.ValueObjects
     public class Document : ValueObject
     {
     private const int CNPJ_LENGTH = 14;
-    private const int CPF_LENGTH = 14;
+    private const int CPF_LENGTH = 11;
 
     public EDocumentType Type { get; private set; }
         public string Number { get; private set; }
@@ -15,16 +15,16 @@ namespace PaymentContext.Domain.ValueObjects
         {
             Number = number;
             Type = type;
-            AddNotifications(new Contract().Requires().IsTrue(Validate(), "Document.Number", "Invalid Document."));
+            AddNotifications(new Contract().Requires().IsTrue(IsValid(), "Document.Number", "Invalid Document."));
         }
 
-        private bool Validate()
+        private bool IsValid()
         {
-            if (Type == EDocumentType.CPF && Number.Length < CPF_LENGTH) { return true; }
+            if (Type == EDocumentType.CPF && Number.Length < CPF_LENGTH) { return false; }
 
-            if (Type == EDocumentType.CNPJ && Number.Length < CNPJ_LENGTH) { return true; }
+            if (Type == EDocumentType.CNPJ && Number.Length < CNPJ_LENGTH) { return false; }
 
-            return false;
+            return true;
         }
     }
 }
