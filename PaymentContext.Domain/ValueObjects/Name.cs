@@ -10,12 +10,6 @@ namespace PaymentContext.Domain.ValueObjects
         {
             First = first;
             Last = last;
-
-            AddNotifications(new Contract()
-                .Requires()
-                .HasMinLen(First, 3, "Name.First", "Name must contain at least three characters.")
-                .HasMinLen(Last, 3, "Name.Last", "Name must contain at least three characters.")
-            );
         }
 
         public string First { get; private set; }

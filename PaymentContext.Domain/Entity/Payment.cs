@@ -25,12 +25,6 @@ namespace PaymentContext.Domain.Entity
             ExpireDate = expireDate;
             Total = total;
             TotalPaid = totalPaid;
-
-            AddNotifications(new Contract()
-                .Requires()
-                .IsLowerOrEqualsThan(0, Total, "Payment.Total", "Payment must be a value greater than zero.")
-                .IsGreaterThan(Total, TotalPaid, "Payment.TotalPaid", "Payment value is lower than total")
-            );
         }
 
         private void SetGuid()

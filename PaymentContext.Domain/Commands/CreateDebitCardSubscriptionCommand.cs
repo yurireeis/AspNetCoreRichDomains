@@ -1,10 +1,13 @@
 using System;
+using Flunt.Notifications;
+using Flunt.Validations;
 using PaymentContext.Domain.Enums;
 using PaymentContext.Domain.ValueObjects;
+using PaymentContext.Shared.Commands;
 
 namespace PaymentContext.Domain.Commands
 {
-    public class CreateDebitCardSubscriptionCommand
+    public class CreateDebitCardSubscriptionCommand : Notifiable, ICommand
     {
         // creating paypal signature
         // nothing more that joining all information needed to create a PayPal Subscription (in this example)
@@ -27,5 +30,16 @@ namespace PaymentContext.Domain.Commands
         public double Balance { get; set; }
         public double SpecialCredit { get; set; }
         public double SpecialCreditInterest { get; set; }
+        public double Total { get; set; }
+        public double TotalPaid { get; set; }
+
+        public void Validate()
+        {
+            AddNotifications(new Contract()
+                .Requires()
+                .IsLowerOrEqualsThan(0, Total, "Payment.Total", "Payment must be a value greater than zero.")
+                .IsGreaterThan(Total, TotalPaid, "Payment.TotalPaid", "Payment value is lower than total")
+            );
+        }
     }
 }
