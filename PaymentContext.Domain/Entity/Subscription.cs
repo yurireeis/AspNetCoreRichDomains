@@ -8,15 +8,6 @@ namespace PaymentContext.Domain.Entity
 {
     public class Subscription : Entities
     {
-        public Subscription(DateTime? expireDate)
-        {
-            CreateDate = DateTime.Now;
-            LastUpdateDate =  DateTime.Now;
-            ExpireDate = expireDate;
-            Activate(true);
-            _PaymentMethods = new List<PaymentMethod>();
-        }
-
         public DateTime CreateDate { get; private set; }
         public DateTime LastUpdateDate { get; private set; }
         public DateTime? ExpireDate { get; private set; }
@@ -26,17 +17,25 @@ namespace PaymentContext.Domain.Entity
         private IList<PaymentMethod> _PaymentMethods;
         private DateTime dateTime;
 
-        public void Activate(bool status)
+        public Subscription(DateTime? expireDate)
+        {
+            CreateDate = DateTime.Now;
+            LastUpdateDate =  DateTime.Now;
+            ExpireDate = expireDate;
+            ActivateSubscription(true);
+            _PaymentMethods = new List<PaymentMethod>();
+        }
+
+        public void ActivateSubscription(bool status)
         {
             Active = status;
             LastUpdateDate = DateTime.Now;
         }
         public void AddPaymentMethod(PaymentMethod paymentMethod)
         {
-            AddNotifications(new Contract().Requires().IsGreaterThan(
-                DateTime.Now, paymentMethod.PaidDate,
-                "Subscription.PaidDate",
-                "Payment date is older than current Date.")
+            AddNotifications(new Contract()
+                .Requires()
+                .IsGreaterThan(DateTime.Now, paymentMethod.PaidDate, "Subscription.PaidDate", "Payment date is older than current Date.")
             );
             _PaymentMethods.Add(paymentMethod);
         }

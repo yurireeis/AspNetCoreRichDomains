@@ -9,23 +9,40 @@ namespace PaymentContext.Tests.Entities
     [TestClass]
     public class StudentTests
     {
+        private Student _Student;
+        private Subscription _Subscription;
+        private Name _Name;
+        private Document _Document;
+        private Email _Email;
+        private Address _Address;
+
+        [TestInitialize]
+        public void TestInitialize(){
+            _Name = new Name("Yuri", "Reis");
+            _Document = new Document("00000000000", EDocumentType.CPF);
+            _Email = new Email("batman@dc.com");
+            _Address = new Address("Rua X", "2", "Bairro", "Florianopolis", "Santa Catarina", "Brasil", "88000000");
+        }
 
         [TestMethod]
-        public void ShoudReturnErrorWhenSubscriptionHasntNoPaymentMethods()
+        public void ShoudReturnErrorWhenStudentSubscriptionHasNotPaymentMethods()
         {
-            Assert.Fail();
-        }
-        
-        [TestMethod]
-        public void ShouldReturnErrorWhenHasAnActiveSubscription()
-        {
-            Assert.Fail();
+            // _Student = new Student(_Name, _Email, _Address, _Document);
+            // _Subscription = new Subscription(DateTime.Now);
+            // _Student.AddSubscription(_Subscription);
+            // Assert.IsTrue(_Student.Invalid);
         }
 
         [TestMethod]
-        public void ShouldReturnErrorWhenHasntAnActiveSubscription()
+        [DataTestMethod]
+        public void ShouldReturnSuccessWhenStudentHasAnActiveSubscriptionAndPaymentMethod()
         {
-            Assert.Fail();
-        } 
+            _Student = new Student(_Name, _Email, _Address, _Document);
+            _Subscription = new Subscription(DateTime.Now);
+            var payment = new Boleto(DateTime.Now, DateTime.Now.AddDays(3), new Document("0000000000", EDocumentType.CPF), 100, 100, "079909090797090");
+            _Subscription.AddPaymentMethod(payment);
+            _Student.AddSubscription(_Subscription);
+            Assert.IsTrue(_Student.Valid);
+        }
     }
 }

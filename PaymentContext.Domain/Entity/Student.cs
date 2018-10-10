@@ -9,27 +9,28 @@ namespace PaymentContext.Domain.Entity
 {
     public class Student : Entities
     {
-        public Student(
-            Name name,
-            Email email,
-            Address address,
-            Document document
-        ) : base() {
-            this.Name = name;
-            this.Email = email;
-            this.Address = address;
-            this.Document = document;
-            _Subscriptions = new List<Subscription>();
-
-            // this method concatenate the notifications
-            AddNotifications(Name, Document, Email, Address);
-        }
         public Name Name { get; private set; }
         public Email Email { get; private set; }
         public Address Address { get; private set; }
         public Document Document { get; private set; }
         public IReadOnlyCollection<Subscription> Subscriptions { get { return _Subscriptions.ToArray(); } }
         private IList<Subscription> _Subscriptions;
+
+        public Student(
+            Name name,
+            Email email,
+            Address address,
+            Document document
+        ) : base() {
+            Name = name;
+            Email = email;
+            Address = address;
+            Document = document;
+            _Subscriptions = new List<Subscription>();
+
+            // this method concatenate the notifications
+            AddNotifications(Name, Document, Email, Address);
+        }
 
         public void AddSubscription(Subscription subscription)
         {
@@ -45,7 +46,7 @@ namespace PaymentContext.Domain.Entity
             AddNotifications(new Contract()
                 .Requires()
                 .IsFalse(hasSubscriptionActive, "Student.Subscriptions", "You are already subscribed.")
-                .IsGreaterThan(0, subscription.PaymentMethods.Count, "Student.Subscription.PaymentMethods", "This subscription Doesn't have any payment method.")
+                .IsLowerOrEqualsThan(0, subscription.PaymentMethods.Count, "Student.Subscription.PaymentMethods", "This subscription Doesn't have any payment method.")
             );
         }
     }
