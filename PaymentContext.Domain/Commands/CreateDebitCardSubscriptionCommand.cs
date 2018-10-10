@@ -23,8 +23,10 @@ namespace PaymentContext.Domain.Commands
         public string State { get; private set; }
         public string Country { get; private set; }
         public string ZipCode { get; private set; }
+        public string Owner { get; set; }
         public DateTime paidDate { get; set; }
         public DateTime expireDate { get; set; }
+        public DateTime SubscriptionExpireDate { get; set; }
         public string PayerDocument { get; set; }
         public EDocumentType PayerDocumentType { get; set; }
         public double Balance { get; set; }

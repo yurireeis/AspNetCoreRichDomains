@@ -16,22 +16,24 @@ namespace PaymentContext.Domain.Commands
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PayerEmailAddress { get; set; }
-        public string PublicArea { get; private set; }
-        public string Number { get; private set; }
-        public string Neighborhood { get; private set; }
-        public string City { get; private set; }
-        public string State { get; private set; }
-        public string Country { get; private set; }
-        public string ZipCode { get; private set; }
-        public DateTime paidDate { get; set; }
-        public DateTime expireDate { get; set; }
+        public string PublicArea { get; set; }
+        public string Number { get; set; }
+        public string Neighborhood { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Country { get; set; }
+        public string ZipCode { get; set; }
+        public string Owner { get; set; }
+        public DateTime PaidDate { get; set; }
+        public DateTime ExpireDate { get; set; }
+        public DateTime SubscriptionExpireDate { get; set; }
         public string PayerDocument { get; set; }
         public EDocumentType PayerDocumentType { get; set; }
-        public double Limit { get; private set; }
-        public string ChargingAddress { get; private set; }
-        public DateTime DueDate { get; private set; }
-        public DateTime CardExpireDate { get; private set; }
-        public double Interest { get; private set; }
+        public double Limit { get; set; }
+        public string ChargingAddress { get; set; }
+        public DateTime DueDate { get; set; }
+        public DateTime CardExpireDate { get; set; }
+        public double Interest { get; set; }
         public double Total { get; set; }
         public double TotalPaid { get; set; }
 

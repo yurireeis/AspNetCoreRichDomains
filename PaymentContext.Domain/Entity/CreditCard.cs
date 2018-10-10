@@ -10,7 +10,7 @@ namespace PaymentContext.Domain.Entity
         public DateTime DueDate { get; private set; }
         public DateTime CardExpireDate { get; private set; }
         public double Interest { get; private set; }
-        protected CreditCard(
+        public CreditCard(
             DateTime paidDate,
             DateTime expireDate,
             Document document,

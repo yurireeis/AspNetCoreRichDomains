@@ -8,7 +8,7 @@ namespace PaymentContext.Domain.Entity
         public double Balance { get; set; }
         public double SpecialCredit { get; set; }
         public double SpecialCreditInterest { get; set; }
-        protected DebitCard(
+        public DebitCard(
             DateTime paidDate,
             DateTime expireDate,
             Document document,

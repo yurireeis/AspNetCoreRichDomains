@@ -23,15 +23,14 @@ namespace PaymentContext.Domain.Commands
         public string State { get; private set; }
         public string Country { get; private set; }
         public string ZipCode { get; private set; }
-        public DateTime paidDate { get; set; }
-        public DateTime expireDate { get; set; }
+        public DateTime PaidDate { get; set; }
+        public DateTime ExpireDate { get; set; }
+        public DateTime SubscriptionExpireDate { get; set; }
         public string PayerDocument { get; set; }
         public EDocumentType PayerDocumentType { get; set; }
-        public double total { get; set; }
-        public double totalPaid { get; set; }
-        public string transationCode { get; set; }
         public double Total { get; set; }
         public double TotalPaid { get; set; }
+        public string transationCode { get; set; }
 
         public void Validate()
         {

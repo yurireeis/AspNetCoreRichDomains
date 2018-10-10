@@ -23,5 +23,7 @@ namespace PaymentContext.Domain.ValueObjects
             }
             return true;
         }
+
+        public override string ToString() => $"{First} {Last}";
     }
 }

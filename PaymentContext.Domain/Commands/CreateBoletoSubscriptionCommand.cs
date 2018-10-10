@@ -14,6 +14,11 @@ namespace PaymentContext.Domain.Commands
         // all information that I need to create a paypal payment
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string PayerDocument { get; set; }
+        public EDocumentType PayerDocumentType { get; set; }
+        public DateTime PaidDate { get; set; }
+        public DateTime ExpireDate { get; set; }
+        public DateTime SubscriptionExpireDate { get; set; }
         public string PayerEmailAddress { get; set; }
         public string PublicArea { get; private set; }
         public string Number { get; private set; }
