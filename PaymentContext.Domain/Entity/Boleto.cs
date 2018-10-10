@@ -5,6 +5,9 @@ namespace PaymentContext.Domain.Entity
 {
     public class Boleto : PaymentMethod
     {
+        
+        public string BarCode { get; private set; }
+        public string BoletoNumber { get; private set; }
         public Boleto(
             DateTime paidDate,
             DateTime expireDate,
@@ -23,8 +26,5 @@ namespace PaymentContext.Domain.Entity
         }
 
         private void setBoletoNumber() => BoletoNumber = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 10).ToUpper();
-
-        public string BarCode { get; private set; }
-        public string BoletoNumber { get; private set; }
     }
 }

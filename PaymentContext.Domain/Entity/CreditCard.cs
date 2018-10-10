@@ -5,6 +5,11 @@ namespace PaymentContext.Domain.Entity
 {
     public class CreditCard : Card
     {
+        public double Limit { get; private set; }
+        public string ChargingAddress { get; private set; }
+        public DateTime DueDate { get; private set; }
+        public DateTime CardExpireDate { get; private set; }
+        public double Interest { get; private set; }
         protected CreditCard(
             DateTime paidDate,
             DateTime expireDate,
@@ -32,11 +37,5 @@ namespace PaymentContext.Domain.Entity
             DueDate = dueDate;
             Interest = interest;
         }
-
-        public double Limit { get; private set; }
-        public string ChargingAddress { get; private set; }
-        public DateTime DueDate { get; private set; }
-        public DateTime CardExpireDate { get; private set; }
-        public double Interest { get; private set; }
     }
 }

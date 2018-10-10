@@ -5,6 +5,9 @@ namespace PaymentContext.Domain.Entity
 {
     public class DebitCard : Card
     {
+        public double Balance { get; set; }
+        public double SpecialCredit { get; set; }
+        public double SpecialCreditInterest { get; set; }
         protected DebitCard(
             DateTime paidDate,
             DateTime expireDate,
@@ -22,9 +25,5 @@ namespace PaymentContext.Domain.Entity
             cardNumber,
             owner
         ){}
-
-        public double Balance { get; set; }
-        public double SpecialCredit { get; set; }
-        public double SpecialCreditInterest { get; set; }
     }
 }
