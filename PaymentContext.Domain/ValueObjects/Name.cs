@@ -14,7 +14,7 @@ namespace PaymentContext.Domain.ValueObjects
             AddNotifications(new Contract()
                 .Requires()
                 .HasMinLen(First, 3, "Name.First", "Name must contain at least three characters.")
-                .HasMinLen(Last, 3, "Name.Last", "Name must contain at least three characters.");
+                .HasMinLen(Last, 3, "Name.Last", "Name must contain at least three characters.")
             );
         }
 
