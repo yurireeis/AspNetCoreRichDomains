@@ -38,15 +38,14 @@ namespace PaymentContext.Domain.Entity
             // when you set an IReadOnlyCollection, you must create a private IList property to deal with it
             bool hasSubscriptionActive = false;
 
-            foreach (var sub in Subscriptions)
-            {
-                if (sub.Active) { hasSubscriptionActive = true; }
-            }
+            foreach (var sub in Subscriptions) { if (sub.Active) { hasSubscriptionActive = true; } }
+
             _Subscriptions.Add(subscription);
 
             AddNotifications(new Contract()
                 .Requires()
                 .IsFalse(hasSubscriptionActive, "Student.Subscriptions", "You are already subscribed.")
+                .IsGreaterThan(0, subscription.PaymentMethods.Count, "Student.Subscription.PaymentMethods", "This subscription Doesn't have any payment method.")
             );
         }
     }
