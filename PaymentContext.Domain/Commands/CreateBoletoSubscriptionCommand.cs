@@ -20,15 +20,15 @@ namespace PaymentContext.Domain.Commands
         public DateTime ExpireDate { get; set; }
         public DateTime SubscriptionExpireDate { get; set; }
         public string PayerEmailAddress { get; set; }
-        public string PublicArea { get; private set; }
-        public string Number { get; private set; }
-        public string Neighborhood { get; private set; }
-        public string City { get; private set; }
-        public string State { get; private set; }
-        public string Country { get; private set; }
-        public string ZipCode { get; private set; }
-        public string BarCode { get; private set; }
-        public string BoletoNumber { get; private set; }
+        public string PublicArea { get; set; }
+        public string Number { get; set; }
+        public string Neighborhood { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Country { get; set; }
+        public string ZipCode { get; set; }
+        public string BarCode { get; set; }
+        public string BoletoNumber { get; set; }
         public double Total { get; set; }
         public double TotalPaid { get; set; }
 
@@ -40,7 +40,7 @@ namespace PaymentContext.Domain.Commands
                 .HasMinLen(FirstName, 3, "Name.First", "Name must contain at least three characters.")
                 .HasMinLen(LastName, 3, "Name.Last", "Name must contain at least three characters.")
                 .IsLowerOrEqualsThan(0, Total, "Payment.Total", "Payment must be a value greater than zero.")
-                .IsGreaterThan(Total, TotalPaid, "Payment.TotalPaid", "Payment value is lower than total")
+                .IsGreaterThan(TotalPaid, Total, "Payment.TotalPaid", "Payment value is lower than total")
             );
         }
     }
