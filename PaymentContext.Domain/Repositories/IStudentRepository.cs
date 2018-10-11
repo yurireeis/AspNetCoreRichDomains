@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using PaymentContext.Domain.Entity;
 
 namespace PaymentContext.Domain.Repositories
@@ -8,5 +9,6 @@ namespace PaymentContext.Domain.Repositories
         bool DocumentExists(string document);
         bool EmailExists(string email);
         void CreateSubscription(Student student);
+        IList<Student> GetStudents();
     }
 }

@@ -8,7 +8,7 @@ namespace PaymentContext.Domain.Queries
     {
         // using expressions only (Don't use SQL strings)
         // the method above bring student by document
-        public static Expression<Func<Student, bool>> GetProductsInStock(string document)
+        public static Expression<Func<Student, bool>> GetStudentInfo(string document)
         {
             return x => x.Document.Number == document;
         }
